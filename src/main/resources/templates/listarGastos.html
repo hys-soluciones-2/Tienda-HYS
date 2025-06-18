@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listar Gastos</title>
+        <meta charset="UTF-8">
+           <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .total-amount {
+                font-weight: bold;
+                color: #2e7d32;
+            }
+            .no-data {
+                text-align: center;
+                padding: 20px;
+                color: #666;
+                font-style: italic;
+            }
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                margin-top: 20px;
+            }
+            .btn:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Listar Gastos</h1>
+
+        <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
+        <a th:href="@{/agregarGastos}">Agregar Gastos</a>
+        <br/>
+
+        <!-- comment
+    <p th:text="${tipoGastos}">Aquí debería mostrarse la lista</p>
+        -->   
+        <div th:if="${gastos != null and !gastos.empty}">
+            <table border="1">
+                <tr>
+                    <th>idGasto</th>
+                    <th>Fecha</th>
+                    <th>Valor</th>
+                    <th>Tipo de gasto</th>
+                    <th>Editar</th>
+                </tr>
+                <tr th:each="gasto:${gastos}">
+                    <td th:text="${gasto.idGasto}">01/01/2025</td>
+                    <td th:text="${gasto.fecha}">123.45</td>
+                    <td th:text="${gasto.valor}"></td>
+                    <td th:text="${gasto.tipoGasto.nombre}"></td>
+                    <td> <a th:href="@{/editarGasto/} + ${gasto.idGasto}" th:text="Editar"></a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${gastos == null or gastos.empty}">
+            La lista de tipos gastos esta vacia
+        </div>
+        <br/>
+        <a th:href="@{/}">Regresar Inicio</a>
+    </body>
+</html>

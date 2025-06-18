@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Detalle de las Compras</title>
+        <meta charset="UTF-8">
+         <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .total-amount {
+                font-weight: bold;
+                color: #2e7d32;
+            }
+            .no-data {
+                text-align: center;
+                padding: 20px;
+                color: #666;
+                font-style: italic;
+            }
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                margin-top: 20px;
+            }
+            .btn:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Lista del Detalle de las Compras</h1>
+        <!-- 
+        <p th:text="${estado}">Aquí debería mostrarse la lista</p>
+        <p th:text="${provedores}">Aquí debería mostrarse la lista</p>
+        <p th:text="${compras}">Aquí debería mostrarse la lista</p>
+        <p th:text="${detalleCompras}">Aquí debería mostrarse la lista</p>
+        -->
+        <div th:if="${compras != null and !compras.empty}">
+            <table border="1">
+                <tr>
+                    <th>IdCompra</th>
+                    <th>Fecha Compra</th>
+                    <th>Fecha Llegada</th>
+                    <th>Estado</th>
+                    <th>Provedor</th>
+                    <th>Total Compra</th>
+                </tr>
+               <tr th:each="compra:${compras}"> 
+                    <td th:text="${compra.idCompra}"></td>
+                    <td th:text="${compra.fechaCompra}"></td>
+                    <td th:text="${compra.fechaLlegada}"></td>
+                    <td th:text="${compra.estado.nombre}"></td>
+                    <td th:text="${compra.provedor.nombre}"></td>
+                    <td th:text="${compra.totalCompra}"></td>
+              
+            </table>
+        </div>
+        <div th:if="${compras == null or compras.empty}">
+            La lista de detalle compras esta vacia
+        </div>
+        <br/>
+        <a th:href="@{/}">Regresar Inicio</a>
+    </body>
+</html>
+<!-- <!DOCTYPE html>
+
+
+        <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
+<!--    <a th:href="@{/agregarGastos}">Agregar Gastos</a>
+    <br/>
+
+    
+<p th:text="${tipoGastos}">Aquí debería mostrarse la lista</p>
+   
+    
+    
+</body>
+</html>
+-->

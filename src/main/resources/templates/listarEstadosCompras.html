@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Estados de compras</title>
+        <meta charset="UTF-8">
+           <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .total-amount {
+                font-weight: bold;
+                color: #2e7d32;
+            }
+            .no-data {
+                text-align: center;
+                padding: 20px;
+                color: #666;
+                font-style: italic;
+            }
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                margin-top: 20px;
+            }
+            .btn:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Tienda HYS Lista los Estados de Compras</h1>
+        <br/>
+       
+        <a th:href="@{/agregarEstadoCompras}">Crear EstadosCompras</a>
+         <div th:if="${estadosCompras != null and !estadosCompras.empty}">
+        <table border="1">
+            <tr>
+                <th>idEstado</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Editar</th>
+                
+            </tr>
+           
+            <tr th:each="estado:${estadosCompras}">
+                <td th:text="${estado.idEstado}"></td>
+                <td th:text="${estado.nombre}"></td>
+                <td th:text="${estado.descripcion}"></td>
+              
+                <td> <a th:href="@{/editarEstadoCompra/} + ${estado.idEstado}" th:text="Editar"></a></td>
+                  
+            </tr>
+        </table>
+         </div>
+        
+         <div th:if="${estadosCompras == null or estadosCompras.empty}">
+             La lista de compras esta vacia
+         </div>
+        <br/><!-- comment -->
+       
+        <a th:href="@{/}">Regresar Inicio</a>
+    </body>
+</html>

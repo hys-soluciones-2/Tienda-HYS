@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Datos Provedor</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h1>Datos del Provedor</h1>
+        <a th:href="@{/listarProvedores}">Regresar</a>
+        <br/><!-- th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
+        <form th:action="@{/guardarProvedor}" method="post" th:object="${provedores}">
+            <input type="hidden" name="idProvedor" th:field="*{idProvedor}"/>
+            <br/>
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" th:field="*{nombre}"/>
+            <br/>
+            <label for="descripcion">Descripcion</label>
+            <input type="text" name="descripcion" th:field="*{descripcion}"/>
+            <br/>
+             <label for="estado">Estado</label>
+            <select name="estado" th:field="*{estado}">
+                <option value="true" selected>Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+            <br/>
+            <input type="submit" name="guardar" value="Guardar"/>
+        </form>
+    </body>
+</html>

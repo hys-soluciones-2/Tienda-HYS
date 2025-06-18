@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Modificar Gastos</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Modificar Gastos</h1>
+        <abr/>
+        <a th:href="@{/listarGastos}">Regresar a la lista de Gastos</a>
+        <br/><!-- th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
+        <!-- Este  "@{/guardarVentas}" me comunica con le path en contoladorInicio-->
+        <form th:action="@{/guardarGasto}" method="post" th:object="${gastos}">
+            <input type="hidden" name="idGasto" th:field="*{idGasto}"/>
+            <br/>
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" th:field="*{fecha}"/>
+            <br/>
+            <label for="valor">Valor del Gasto:</label>
+            <input type="number" step="0.01" min="0" th:field="*{valor}" />
+            <br/>
+            <label for="tipoGasto">Tipo de gasto:</label>
+            <select  th:field="*{tipoGasto}">
+                <option value="">-- Selecciona un tipo --</option>
+                <option th:each="tipo : ${tipoGastos}"
+                        th:value="${tipo.idTipo}"
+                        th:text="${tipo.nombre}">Selecciona un tipo 2
+                </option>
+            </select>
+            <br/>
+            <input type="submit" name="guardar" value="Guardar"/>
+        </form>
+    </body>
+</html>

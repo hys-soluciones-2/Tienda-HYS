@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Modificar Estado Compras</title>
+        <meta charset="UTF-8"/>
+        
+    </head>
+    <body>
+        <h1>Modificar o Agregar los Estados de Compras</h1>
+        <a th:href="@{/listarEstadosCompras}">Regresar</a>
+        <br/> <!--th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
+        
+        <form th:action="@{/guardarEstadoCompras}" method="post" th:object="${estadosCompras}">
+           <input type="hidden" name="idEstado" th:field="*{idEstado}"/>
+            <br/>
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" th:field="*{nombre}"/>
+            <br/>
+            <label for="descripcion">Descripcion</label>
+            <input type="text" name="descripcion" th:field="*{descripcion}"/>
+            <br/>
+          
+            <br/>
+            <input type="submit" name="guardar" value="Guardar"/>
+        </form>
+    </body>
+</html>
