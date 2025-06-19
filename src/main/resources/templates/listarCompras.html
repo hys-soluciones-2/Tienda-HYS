@@ -4,7 +4,7 @@
     <head>
         <title>Detalle de las Compras</title>
         <meta charset="UTF-8">
-         <style>
+        <style>
             body {
                 font-family: Arial, sans-serif;
                 margin: 20px;
@@ -51,7 +51,8 @@
         </style>
     </head>
     <body>
-        <h1>Lista del Detalle de las Compras</h1>
+        <header th:replace='layout/plantilla :: header'></header>
+        <h3>Lista del Detalle de las Compras</h3>
         <!-- 
         <p th:text="${estado}">Aquí debería mostrarse la lista</p>
         <p th:text="${provedores}">Aquí debería mostrarse la lista</p>
@@ -68,14 +69,14 @@
                     <th>Provedor</th>
                     <th>Total Compra</th>
                 </tr>
-               <tr th:each="compra:${compras}"> 
+                <tr th:each="compra:${compras}"> 
                     <td th:text="${compra.idCompra}"></td>
                     <td th:text="${compra.fechaCompra}"></td>
                     <td th:text="${compra.fechaLlegada}"></td>
                     <td th:text="${compra.estado.nombre}"></td>
                     <td th:text="${compra.provedor.nombre}"></td>
                     <td th:text="${compra.totalCompra}"></td>
-              
+
             </table>
         </div>
         <div th:if="${compras == null or compras.empty}">
@@ -83,6 +84,7 @@
         </div>
         <br/>
         <a th:href="@{/}">Regresar Inicio</a>
+        <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>
 <!-- <!DOCTYPE html>

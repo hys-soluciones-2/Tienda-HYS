@@ -51,7 +51,8 @@
         </style>
     </head>
     <body>
-        <h1>Tienda HYS Lista los Estados de Compras</h1>
+        <header th:replace='layout/plantilla :: header'></header>
+        <h3>Tienda HYS Lista los Estados de Compras</h3>
         <br/>
        
         <a th:href="@{/agregarEstadoCompras}">Crear EstadosCompras</a>
@@ -82,5 +83,6 @@
         <br/><!-- comment -->
        
         <a th:href="@{/}">Regresar Inicio</a>
+         <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

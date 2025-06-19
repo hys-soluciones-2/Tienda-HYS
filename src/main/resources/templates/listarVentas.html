@@ -51,7 +51,8 @@
         </style>
     </head>
     <body>
-        <h1>Listar Ventas</h1>
+        <header th:replace='layout/plantilla :: header'></header>
+        <h3>Listar Ventas</h3>
         <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
          <a th:href="@{/agregarVentas}">Agregar Ventas</a>
         <br/><!-- comment -->
@@ -81,10 +82,8 @@
          <div th:if="${ventas == null or ventas.empty}">
              La lista de tipos gastos esta vacia
          </div>
-       
-      
-       
          <br/>
            <a th:href="@{/}">Regresar Inicio</a>
+            <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

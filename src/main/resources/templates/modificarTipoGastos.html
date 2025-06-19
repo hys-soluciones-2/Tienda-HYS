@@ -6,7 +6,8 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Modificar el Tipo de Gastos</h1>
+        <header th:replace='layout/plantilla :: header'></header>
+        <h3>Modificar el Tipo de Gastos</h3>
         <abr/>
         <a th:href="@{/listarTipoGastos}">Regresar a la lista</a>
           <br/><!-- th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
@@ -29,5 +30,6 @@
             <br/>
             <input type="submit" name="guardar" value="Guardar"/>
         </form>
+           <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

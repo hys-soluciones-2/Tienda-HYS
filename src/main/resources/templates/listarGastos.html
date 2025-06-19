@@ -51,7 +51,8 @@
         </style>
     </head>
     <body>
-        <h1>Listar Gastos</h1>
+        <header th:replace='layout/plantilla :: header'></header>
+        <h3>Listar Gastos</h3>
 
         <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
         <a th:href="@{/agregarGastos}">Agregar Gastos</a>
@@ -83,5 +84,6 @@
         </div>
         <br/>
         <a th:href="@{/}">Regresar Inicio</a>
+         <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

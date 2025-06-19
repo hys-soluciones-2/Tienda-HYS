@@ -51,7 +51,8 @@
         </style>
     </head>
     <body>
-        <h1>Tienda HYS Lista de Provedores</h1>
+        <header th:replace='layout/plantilla :: header'></header>
+        <h3>Tienda HYS Lista de Provedores</h3>
         <br/>
        
         <a th:href="@{/agregarProvedor}">Crear Provedor</a>
@@ -84,5 +85,6 @@
         <br/><!-- comment -->
        
         <a th:href="@{/}">Regresar Inicio</a>
+         <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>
