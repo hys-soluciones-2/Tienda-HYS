@@ -68,7 +68,7 @@
                     <th>Fecha</th>
                     <th>Valor</th>
                     <th>Tipo de gasto</th>
-                    <th>Editar</th>
+                    <th>[[#{accion.editar}]]</th>
                 </tr>
                 <tr th:each="gasto:${gastos}">
                     <td th:text="${gasto.idGasto}">01/01/2025</td>
@@ -83,7 +83,7 @@
             La lista de tipos gastos esta vacia
         </div>
         <br/>
-        <a th:href="@{/}">Regresar Inicio</a>
+        <a th:href="@{/}">[[#{accion.regresarInicio}]]</a>
          <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

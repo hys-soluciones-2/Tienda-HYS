@@ -55,14 +55,14 @@
         <h3>Tienda HYS Lista los Estados de Compras</h3>
         <br/>
        
-        <a th:href="@{/agregarEstadoCompras}">Crear EstadosCompras</a>
+        <a th:href="@{/agregarEstadoCompras}">Crear Estados de Compras</a>
          <div th:if="${estadosCompras != null and !estadosCompras.empty}">
         <table border="1">
             <tr>
                 <th>idEstado</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Editar</th>
+                <th>[[#{accion.editar}]]</th>
                 
             </tr>
            
@@ -82,7 +82,7 @@
          </div>
         <br/><!-- comment -->
        
-        <a th:href="@{/}">Regresar Inicio</a>
+        <a th:href="@{/}">[[#{accion.regresarInicio}]]</a>
          <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

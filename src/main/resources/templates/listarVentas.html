@@ -62,7 +62,7 @@
                 <th>idVenta</th>
                 <th>Fecha</th>
                 <th>Total</th>
-                <th>Editar</th>
+                <th>[[#{accion.editar}]]</th>
                 
             </tr>
           
@@ -83,7 +83,7 @@
              La lista de tipos gastos esta vacia
          </div>
          <br/>
-           <a th:href="@{/}">Regresar Inicio</a>
+           <a th:href="@{/}">[[#{accion.regresarInicio}]]</a>
             <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

@@ -8,19 +8,19 @@
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>Pagina de Presentacion INICIO</h3>
-        <a th:href="@{/listarProductos}">Listar Productos</a>
+        <a th:href="@{/listarProductos}">[[#{listar.productos}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarProvedores}">Listar Provedores</a>
+        <a th:href="@{/listarProvedores}">[[#{listar.Provedores}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarEstadosCompras}">Listar Estados Compras</a>
+        <a th:href="@{/listarEstadosCompras}">[[#{listar.estadoCompras}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarTipoGastos}">Listar Los Tipos de Gastos</a>
+        <a th:href="@{/listarTipoGastos}">[[#{listar.tiposGastos}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarVentas}">Listar Tabla de Ventas</a>
+        <a th:href="@{/listarVentas}">[[#{listar.tablaVentas}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarGastos}">Listar Tabla de Gastos</a>
+        <a th:href="@{/listarGastos}">[[#{listar.tablaGastos}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarCompras}">Listar las Compras</a>
+        <a th:href="@{/listarCompras}">[[#{listar.compras}]]</a>
         <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

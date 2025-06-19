@@ -11,11 +11,11 @@
     <body>
         <header th:fragment='header'>
             <!-- <h1>[[#{plantilla.titulo}]]</h1>comment -->
-            <h1>Sistema de Inventario Tienda H.Y.S</h1>
+            <h1 th:text='#{plantilla.titulo}'>Titulo</h1>
             
         </header>
         <footer th:fracment='footer'>
-            <p>Derechos Reservados HYS-Soluciones-2 : <a href="https://www.github.com/hys-soluciones-2/Tienda-HYS" target="_blank">Page Github</a></p>
+            <p>[[#{plantilla.pie-pagina}]] <a href="https://www.github.com/hys-soluciones-2/Tienda-HYS" target="_blank">Page Github</a></p>
         </footer>
     </body>
 </html>
