@@ -52,10 +52,10 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Tienda HYS Lista los Tipos de Gastos</h3>
+        <h3>[[#{subtitulo.listarTiposGastos}]]</h3>
         <br/>
        
-        <a th:href="@{/agregarTipoGastos}">Crear el tipo de gastos</a>
+        <a th:href="@{/agregarTipoGastos}">[[#{accion.agregar}]]</a>
          <div th:if="${tipoGastos != null and !tipoGastos.empty}">
         <table border="1">
             <tr>

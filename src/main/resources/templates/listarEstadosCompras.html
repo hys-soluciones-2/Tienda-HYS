@@ -52,10 +52,10 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Tienda HYS Lista los Estados de Compras</h3>
+        <h3>[[#{subtitulo.listaEstadoCompras}]]</h3>
         <br/>
        
-        <a th:href="@{/agregarEstadoCompras}">Crear Estados de Compras</a>
+        <a th:href="@{/agregarEstadoCompras}">[[#{accion.agregar}]]</a>
          <div th:if="${estadosCompras != null and !estadosCompras.empty}">
         <table border="1">
             <tr>

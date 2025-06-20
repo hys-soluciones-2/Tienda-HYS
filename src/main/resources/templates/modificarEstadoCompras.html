@@ -9,7 +9,7 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Modificar o Agregar los Estados de Compras</h3>
+        <h3>[[#{subtitulo.modificarCompras}]]</h3>
         <a th:href="@{/listarEstadosCompras}">[[#{accion.regresar}]]</a>
         <br/> <!--th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
         

@@ -7,17 +7,17 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Modificar el Tipo de Gastos</h3>
+        <h3>[[#{subTitulo.tipoGastos}]]</h3>
         <abr/>
-        <a th:href="@{/listarTipoGastos}">Regresar a la lista</a>
+        <a th:href="@{/listarTipoGastos}">[[#{accion.regresar}]]</a>
           <br/><!-- th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
         <form th:action="@{/guardarTipoGastos}" method="post" th:object="${tipoGastos}">
             <input type="hidden" name="idtipo" th:field="*{idTipo}"/>
             <br/>
-            <label for="nombre">Nombre</label>
+            <label for="nombre">[[#{formulario.nombre}]]</label>
             <input type="text" name="nombre" th:field="*{nombre}"/>
             <br/>
-            <label for="descripcion">Descripcion</label>
+            <label for="descripcion">[[#{formulario.descripcion}]]</label>
             <input type="text" name="descripcion" th:field="*{descripcion}"/>
             <br/>
             <!-- 

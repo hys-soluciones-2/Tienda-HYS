@@ -52,10 +52,10 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Tienda HYS Lista de Provedores</h3>
+        <h3>[[#{subtitulo.listaProvedores}]]</h3>
         <br/>
        
-        <a th:href="@{/agregarProvedor}">Crear Provedor</a>
+        <a th:href="@{/agregarProvedor}">[[#{accion.agregar}]]</a>
          <div th:if="${provedores != null and !provedores.empty}">
         <table border="1">
             <tr>

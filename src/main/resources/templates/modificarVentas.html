@@ -8,18 +8,18 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Modificar Ventas</h3>
+        <h3>[[#{subtitulo.modificarVenta}]]</h3>
         <abr/>
-        <a th:href="@{/listarVentas}">Regresar a la lista de ventas</a>
+        <a th:href="@{/listarVentas}">[[#{accion.regresar}]]</a>
         <br/><!-- th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
         <!-- Este  "@{/guardarVentas}" me comunica con le path en contoladorInicio-->
         <form th:action="@{/guardarVentas}" method="post" th:object="${ventas}">
             <input type="hidden" name="idVenta" th:field="*{idVenta}"/>
             <br/>
-            <label for="fecha">Fecha</label>
+            <label for="fecha">[[#{formulario.fecha}]]:</label>
             <input type="date" name="fecha" th:field="*{fecha}"/>
             <br/>
-            <label for="total">Total Venta:</label>
+            <label for="total">[[#{formulario.total}]]:</label>
             <input type="number" step="0.01" min="0" th:field="*{total}" />
             <br/>
             <!-- 

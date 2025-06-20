@@ -52,9 +52,9 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Listar Ventas</h3>
+        <h3>[[#{subtitulo.listarVentas}]]</h3>
         <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
-         <a th:href="@{/agregarVentas}">Agregar Ventas</a>
+         <a th:href="@{/agregarVentas}">[[#{accion.agregar}]]</a>
         <br/><!-- comment -->
             <div th:if="${ventas != null and !ventas.empty}">
         <table border="1">

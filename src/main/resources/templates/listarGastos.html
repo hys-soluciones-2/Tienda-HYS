@@ -52,10 +52,10 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Listar Gastos</h3>
+        <h3>[[#{subtitulo.listarGastos}]]</h3>
 
         <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
-        <a th:href="@{/agregarGastos}">Agregar Gastos</a>
+        <a th:href="@{/agregarGastos}">[[#{accion.agregar}]]</a>
         <br/>
 
         <!-- comment

@@ -52,8 +52,8 @@
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
-        <h3>Tienda HYS Lista de Productos</h3>
-        <a th:href="@{/agregarProducto}">Crear Producto</a>
+        <h3>[[#{subtitulo.listaProducto}]]</h3>
+        <a th:href="@{/agregarProducto}">[[#{accion.agregar}]]</a>
         <br/><!-- comment -->
         <div th:if="${productos != null and !productos.empty}">
             <table border="1">
