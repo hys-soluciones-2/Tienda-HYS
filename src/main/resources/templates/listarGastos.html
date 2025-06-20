@@ -64,11 +64,11 @@
         <div th:if="${gastos != null and !gastos.empty}">
             <table border="1">
                 <tr>
-                    <th>idGasto</th>
-                    <th>Fecha</th>
-                    <th>Valor</th>
-                    <th>Tipo de gasto</th>
-                    <th>[[#{accion.editar}]]</th>
+                    <th>[[#{columna.idGastos}]]</th>
+                    <th>[[#{columna.fechaGasto}]]</th>
+                    <th>[[#{columna.valor}]]</th>
+                    <th>[[#{columna.tipoGasto}]]</th>
+                    <th>[[#{columna.editar}]]</th>
                 </tr>
                 <tr th:each="gasto:${gastos}">
                     <td th:text="${gasto.idGasto}">01/01/2025</td>

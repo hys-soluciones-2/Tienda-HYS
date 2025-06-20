@@ -62,12 +62,12 @@
         <div th:if="${compras != null and !compras.empty}">
             <table border="1">
                 <tr>
-                    <th>IdCompra</th>
-                    <th>Fecha Compra</th>
-                    <th>Fecha Llegada</th>
-                    <th>Estado</th>
-                    <th>Provedor</th>
-                    <th>Total Compra</th>
+                    <th>[[#{columna.idCompra}]]</th>
+                    <th>[[#{columna.fechaCompra}]]</th>
+                    <th>[[#{columna.fechaLlegada}]]</th>
+                    <th>[[#{columna.estado}]]</th>
+                    <th>[[#{columna.provedor}]]</th>
+                    <th>[[#{columna.totalCompra}]]</th>
                 </tr>
                 <tr th:each="compra:${compras}"> 
                     <td th:text="${compra.idCompra}"></td>
