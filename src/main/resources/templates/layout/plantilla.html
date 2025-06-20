@@ -15,7 +15,12 @@
             
         </header>
         <footer th:fracment='footer'>
-            <p>[[#{plantilla.pie-pagina}]] <a href="https://www.github.com/hys-soluciones-2/Tienda-HYS" target="_blank">Page Github</a></p>
+            <div>
+                <br/><!-- comment -->
+                <a th:href="@{/(lang=es)}">ES</a> |
+                <a th:href="@{/(lang=en)}">EN</a> |
+                <span>[[#{plantilla.pie-pagina}]] <a href="https://www.github.com/hys-soluciones-2/Tienda-HYS" target="_blank">Page Github</a></span>
+            </div>
         </footer>
     </body>
 </html>
