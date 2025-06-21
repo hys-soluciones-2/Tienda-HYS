@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://wwweleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Estados de Gastos</title>
         <meta charset="UTF-8">
@@ -55,7 +55,7 @@
         <h3>[[#{subtitulo.listarTiposGastos}]]</h3>
         <br/>
        
-        <a th:href="@{/agregarTipoGastos}">[[#{accion.agregar}]]</a>
+        <a th:href="@{/agregar/tipoGastos}">[[#{accion.agregar}]]</a>
          <div th:if="${tipoGastos != null and !tipoGastos.empty}">
         <table border="1">
             <tr>
@@ -71,7 +71,7 @@
                 <td th:text="${tipo.nombre}"></td>
                 <td th:text="${tipo.descripcion}"></td>
               
-                <td> <a th:href="@{/editarTipoGastos/} + ${tipo.idTipo}" th:text="Editar"></a></td>
+                <td> <a th:href="@{/editar/tipoGastos/} + ${tipo.idTipo}" th:text="Editar"></a></td>
                   
             </tr>
         </table>

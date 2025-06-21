@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://wwweleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Presentacion Inicio</title>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
     </head>
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{listar.paginaPresentacion}]]</h3>
-        <a th:href="@{/listarProductos}">[[#{listar.productos}]]</a>
+        <a th:href="@{/listar/productos}">[[#{listar.productos}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarProvedores}">[[#{listar.Provedores}]]</a>
+        <a th:href="@{/listar/provedores}">[[#{listar.Provedores}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarEstadosCompras}">[[#{listar.estadoCompras}]]</a>
+        <a th:href="@{/listar/estadoCompras}">[[#{listar.estadoCompras}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarTipoGastos}">[[#{listar.tiposGastos}]]</a>
+        <a th:href="@{/listar/tipoGastos}">[[#{listar.tiposGastos}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarVentas}">[[#{listar.tablaVentas}]]</a>
+        <a th:href="@{/listar/ventas}">[[#{listar.tablaVentas}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarGastos}">[[#{listar.tablaGastos}]]</a>
+        <a th:href="@{/listar/gastos}">[[#{listar.tablaGastos}]]</a>
         <br/><!-- comment -->
-        <a th:href="@{/listarCompras}">[[#{listar.compras}]]</a>
+        <a th:href="@{/listar/compras}">[[#{listar.compras}]]</a>
         <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
 </html>

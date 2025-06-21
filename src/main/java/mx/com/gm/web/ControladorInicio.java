@@ -6,6 +6,7 @@ import mx.com.gm.dao.IEstadosComprasDAO;
 import mx.com.gm.dao.IGastosDAO;
 import mx.com.gm.dao.ITipoGastosDAO;
 import mx.com.gm.dao.IVentasDAO;
+import org.slf4j.Logger;
 import mx.com.gm.domain.EstadosCompras;
 import mx.com.gm.domain.Gastos;
 import mx.com.gm.domain.Productos;
@@ -25,6 +26,8 @@ import mx.com.gm.servicio.EstadosComprasService;
 import mx.com.gm.servicio.GastosService;
 import mx.com.gm.servicio.TipoGastosService;
 import mx.com.gm.servicio.VentasService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
@@ -66,14 +69,14 @@ public class ControladorInicio {
     //Esta anotacion me muestra que va hacer una peticion de tipo Get
     //con una ruta en blanco
     @GetMapping("/")
-    public String inicio() {
-
+    public String inicio(@AuthenticationPrincipal User user) {
+       // log.info("Usuario que hiso login: " + user);
         return "index";//Es la pagina que se mostrara
     }
 //------------------------------------------------------------
     //------Maping de Productos
 
-    @GetMapping("/listarProductos")
+    @GetMapping("/listar/productos")
     public String listar(Model model) {
         var productos = productoService.listarProductos();
         model.addAttribute("productos", productos);
@@ -81,18 +84,18 @@ public class ControladorInicio {
     }
 
     //Se agrega el pahf de agregar
-    @GetMapping("/agregarProducto")
+    @GetMapping("/agregar/producto")
     public String agregar(Productos producto) {
         return "modificarProducto";
     }
 
-    @PostMapping("/guardarProducto")
+    @PostMapping("/guardar/producto")
     public String guardar(Productos producto) {
         productoService.guardar(producto);
-        return "redirect:/listarProductos";//Es la pagina que se mostrara;
+        return "redirect:/listar/productos";//Es la pagina que se mostrara;
     }
 
-    @GetMapping("/editar/{idProducto}")
+    @GetMapping("/editar/producto/{idProducto}")
     public String editar(Productos producto, Model model) {
         var productos = productoService.encontrarProducto(producto);
         model.addAttribute("productos", productos);
@@ -101,25 +104,25 @@ public class ControladorInicio {
 
     //-------------------------------------------------------
     //Maping de la tabla de provedores
-    @GetMapping("/listarProvedores")
+    @GetMapping("/listar/provedores")
     public String listarProvedor(Model model) {
         var provedores = provedorService.listaProvedores();
         model.addAttribute("provedores", provedores);
         return "listarProvedores";//Es la pagina que se mostrara;
     }
 
-    @GetMapping("/agregarProvedor")
+    @GetMapping("/agregar/provedor")
     public String agregar(Provedores provedor) {
         return "modificarProvedor";//Es la pagina que se mostrara;
     }
 
-    @PostMapping("/guardarProvedor")
+    @PostMapping("/guardar/provedor")
     public String guardar(Provedores provedor) {
         provedorService.guardar(provedor);
-        return "redirect:/listarProvedores";//se redirige a la pagina que deseo ir
+        return "redirect:/listar/provedores";//se redirige a la pagina que deseo ir
     }
 
-    @GetMapping("/editarProvedor/{idProvedor}")
+    @GetMapping("/editar/provedor/{idProvedor}")
     public String editar(Provedores provedor, Model model) {
         provedor = provedorService.encontrarProvedor(provedor);
         model.addAttribute("provedores", provedor);
@@ -128,25 +131,25 @@ public class ControladorInicio {
 
     //---------------------------------------------------------
     //Maping  de Estados Compras
-    @GetMapping("/listarEstadosCompras")
+    @GetMapping("/listar/estadoCompras")
     public String listarEstadosCompras(Model model) {
         var estadosCompras = estadoComprasServicio.listarEstadosCompras();
         model.addAttribute("estadosCompras", estadosCompras);
         return "listarEstadosCompras";//Es la pagina que se mostrara;
     }
 
-    @GetMapping("/agregarEstadoCompras")
+    @GetMapping("/agregar/estadoCompras")
     public String agregar(EstadosCompras estadosCompras) {
         return "modificarEstadoCompras";//Es la pagina que se mostrara;
     }
 
-    @PostMapping("/guardarEstadoCompras")
+    @PostMapping("/guardar/estadoCompras")
     public String guardarEstado(EstadosCompras estadosCompras) {
         estadoComprasServicio.gusrdarEstadosCompras(estadosCompras);
-        return "redirect:/listarEstadosCompras";//Es la pagina que se mostrara;
+        return "redirect:/listar/estadoCompras";//Es la pagina que se mostrara;
     }
 
-    @GetMapping("/editarEstadoCompra/{idEstado}")
+    @GetMapping("/editar/estadoCompra/{idEstado}")
     public String editar(EstadosCompras estadosCompras, Model model) {
         estadosCompras = estadoComprasServicio.encontrarEstadosCompras(estadosCompras);
         model.addAttribute("estadosCompras", estadosCompras);
@@ -155,25 +158,25 @@ public class ControladorInicio {
 
     //---------------------------------------------------------
     //-----------Maping de Tipo de de Gastos
-    @GetMapping("/listarTipoGastos")
+    @GetMapping("/listar/tipoGastos")
     public String listarTipoGastos(Model model) {
         var tipoGastos = tipoGastosService.listarTipoGastos();
         model.addAttribute("tipoGastos", tipoGastos);
         return "listarTipoGastos";//Es la pagina que se mostrara;
     }
 
-    @GetMapping("/agregarTipoGastos")
+    @GetMapping("/agregar/tipoGastos")
     public String agregar(TipoGastos tipoGastos) {
         return "modificarTipoGastos";
     }
 
-    @PostMapping("/guardarTipoGastos")
+    @PostMapping("/guardar/tipoGastos")
     public String guardarTipo(TipoGastos tipoGastos) {
         tipoGastosService.guardarTipoGastos(tipoGastos);
-        return "redirect:/listarTipoGastos";
+        return "redirect:/listar/tipoGastos";
     }
 
-    @GetMapping("/editarTipoGastos/{idTipo}")
+    @GetMapping("/editar/tipoGastos/{idTipo}")
     public String editar(TipoGastos tipoGastos, Model model) {
         tipoGastos = tipoGastosService.encontrarTipoGastos(tipoGastos);
         model.addAttribute("tipoGastos", tipoGastos);
@@ -182,25 +185,25 @@ public class ControladorInicio {
 
     //-----------------------------------------------------------
     //----------Maping de tabla de Ventas--------------------
-    @GetMapping("/listarVentas")
+    @GetMapping("/listar/ventas")
     public String listarVentas(Model model) {
         var venta = ventasService.listarVentas();
         model.addAttribute("ventas", venta);
         return "/listarVentas";
     }
 
-    @GetMapping("/agregarVentas")
+    @GetMapping("/agregar/ventas")
     public String agregar(Ventas venta) {
         return "modificarVentas";
     }
 
-    @PostMapping("/guardarVentas")
+    @PostMapping("/guardar/ventas")
     public String guardarVenta(Ventas venta) {
         ventasService.guardarVentas(venta);
-        return "redirect:/listarVentas";
+        return "redirect:/listar/ventas";
     }
 
-    @GetMapping("/editarVentas/{idVenta}")
+    @GetMapping("/editar/ventas/{idVenta}")
     public String editar(Ventas venta, Model model) {
         venta = ventasService.encontrarVenta(venta);
         model.addAttribute("ventas", venta);
@@ -209,7 +212,7 @@ public class ControladorInicio {
 
     //----------------------------------------------------
     //---------------Mapping de tabla de Gastos----------------
-    @GetMapping("/listarGastos")
+    @GetMapping("/listar/gastos")
     public String listarGastos(Model model) {
         var gastos = gastosService.listarGastos();
         model.addAttribute("gastos", gastos);
@@ -217,7 +220,7 @@ public class ControladorInicio {
         return "/listarGastos";
     }
 
-    @GetMapping("/agregarGastos")
+    @GetMapping("/agregar/gastos")
     public String agregar(Gastos gasto, Model model) {
 
         var listaTipos = tipoGastosService.listarTipoGastos();
@@ -226,23 +229,24 @@ public class ControladorInicio {
         return "modificarGastos";
     }
 
-    @PostMapping("/guardarGasto")
+    @PostMapping("/guardar/gastos")
     public String guardarGasto(Gastos gasto) {
         gastosService.gusrdarGastos(gasto);
-        return "redirect:/listarGastos";
+        return "redirect:/listar/gastos";
     }
 
-    @GetMapping("/editarGasto/{idGasto}")
+    @GetMapping("/editar/gasto/{idGasto}")
     public String editarGasto(Gastos gasto, Model model) {
-        gasto = gastosService.encontrarGasto(gasto);
-        model.addAttribute("gastos", gasto);
+        var gastos = gastosService.encontrarGasto(gasto);
+        System.out.println("7777777" + gastos);
+        model.addAttribute("gastos", gastos);
         model.addAttribute("tipoGastos", tipoGastosService.listarTipoGastos());// esto llena el select
         return "/modificarGastos";
     }
 
     //----------------------------------------------------
     //---------------Mapping de tabla de Compras----------------
-    @GetMapping("/listarCompras")
+    @GetMapping("/listar/compras")
     public String listarCompras(Model model) {
         var listaCompras1 = compraService.listarCompras();
         

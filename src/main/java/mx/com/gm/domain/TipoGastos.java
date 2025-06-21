@@ -23,11 +23,11 @@ public class TipoGastos implements Serializable {
     private String descripcion;
     
     //________________________________
-    
-     @OneToMany
-    @JoinColumn(name = "id_tipo") // Este nombre debe coincidir con el de la tabla `gastos`
-     private List<Gastos> gastos;
-    
+//    
+//     @OneToMany
+//    @JoinColumn(name = "id_tipo") // Este nombre debe coincidir con el de la tabla `gastos`
+//     private List<Gastos> gastos;
+//    
 
 
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Estados de compras</title>
         <meta charset="UTF-8">
@@ -55,7 +55,7 @@
         <h3>[[#{subtitulo.listaEstadoCompras}]]</h3>
         <br/>
        
-        <a th:href="@{/agregarEstadoCompras}">[[#{accion.agregar}]]</a>
+        <a th:href="@{/agregar/estadoCompras}">[[#{accion.agregar}]]</a>
          <div th:if="${estadosCompras != null and !estadosCompras.empty}">
         <table border="1">
             <tr>
@@ -71,7 +71,7 @@
                 <td th:text="${estado.nombre}"></td>
                 <td th:text="${estado.descripcion}"></td>
               
-                <td> <a th:href="@{/editarEstadoCompra/} + ${estado.idEstado}" th:text="Editar"></a></td>
+                <td> <a th:href="@{/editar/estadoCompra/} + ${estado.idEstado}" th:text="Editar"></a></td>
                   
             </tr>
         </table>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://wwweleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Tienda HYS</title>
         <meta charset="UTF-8">
@@ -55,7 +55,7 @@
         <h3>[[#{subtitulo.listaProvedores}]]</h3>
         <br/>
        
-        <a th:href="@{/agregarProvedor}">[[#{accion.agregar}]]</a>
+        <a th:href="@{/agregar/provedor}">[[#{accion.agregar}]]</a>
          <div th:if="${provedores != null and !provedores.empty}">
         <table border="1">
             <tr>
@@ -73,7 +73,7 @@
                 <td th:text="${provedor.descripcion}"></td>
                 <td th:text="${provedor.estado}"></td>
               
-                <td> <a th:href="@{/editarProvedor/} + ${provedor.idProvedor}" th:text="Editar"></a></td>
+                <td> <a th:href="@{/editar/provedor/} + ${provedor.idProvedor}" th:text="Editar"></a></td>
                   
             </tr>
         </table>

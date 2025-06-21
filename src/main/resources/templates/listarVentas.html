@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://wwweleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Listar Ventas</title>
         <meta charset="UTF-8">
@@ -54,7 +54,7 @@
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listarVentas}]]</h3>
         <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
-         <a th:href="@{/agregarVentas}">[[#{accion.agregar}]]</a>
+         <a th:href="@{/agregar/ventas}">[[#{accion.agregar}]]</a>
         <br/><!-- comment -->
             <div th:if="${ventas != null and !ventas.empty}">
         <table border="1">
@@ -71,7 +71,7 @@
                 <td th:text="${venta.fecha}"></td>
                 <td th:text="${venta.total}"></td>
              
-                <td> <a th:href="@{/editarVentas/} + ${venta.idVenta}" th:text="Editar"></a></td>
+                <td> <a th:href="@{/editar/ventas/} + ${venta.idVenta}" th:text="Editar"></a></td>
                   
             </tr>
            

@@ -10,10 +10,10 @@
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.modificarCompras}]]</h3>
-        <a th:href="@{/listarEstadosCompras}">[[#{accion.regresar}]]</a>
+        <a th:href="@{/listar/estadoCompras}">[[#{accion.regresar}]]</a>
         <br/> <!--th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
         
-        <form th:action="@{/guardarEstadoCompras}" method="post" th:object="${estadosCompras}">
+        <form th:action="@{/guardar/estadoCompras}" method="post" th:object="${estadosCompras}">
            <input type="hidden" name="idEstado" th:field="*{idEstado}"/>
             <br/>
             <label for="nombre">Nombre</label>

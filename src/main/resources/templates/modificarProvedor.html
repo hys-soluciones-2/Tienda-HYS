@@ -9,9 +9,9 @@
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subTitulo.provedor}]]</h3>
-        <a th:href="@{/listarProvedores}">[[#{accion.regresar}]]</a>
+        <a th:href="@{/listar/provedores}">[[#{accion.regresar}]]</a>
         <br/><!-- th:object="${productos}"> esta es la variable  var productos = productoService.listarProductos();de la clase ProductoContolador -->
-        <form th:action="@{/guardarProvedor}" method="post" th:object="${provedores}">
+        <form th:action="@{/guardar/provedor}" method="post" th:object="${provedores}">
             <input type="hidden" name="idProvedor" th:field="*{idProvedor}"/>
             <br/>
             <label for="nombre">[[#{formulario.nombre}]]</label>
