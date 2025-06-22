@@ -216,14 +216,14 @@ public class ControladorInicio {
     public String listarGastos(Model model) {
         var gastos = gastosService.listarGastos();
         model.addAttribute("gastos", gastos);
-        model.addAttribute("tipoGastos", gastos);
+        model.addAttribute("tipoGastos", tipoGastosService.listarTipoGastos());
+
         return "/listarGastos";
     }
 
     @GetMapping("/agregar/gastos")
     public String agregar(Gastos gasto, Model model) {
-
-        var listaTipos = tipoGastosService.listarTipoGastos();
+      // var tiposGastos = tipoGastosService.listarTipoGastos();
         model.addAttribute("gasto", gasto); // esto es necesario para th:object
         model.addAttribute("tipoGastos", tipoGastosService.listarTipoGastos());// esto llena el select
         return "modificarGastos";

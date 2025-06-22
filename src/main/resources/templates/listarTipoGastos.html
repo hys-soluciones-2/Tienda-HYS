@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwweleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Estados de Gastos</title>
@@ -51,10 +51,9 @@
         </style>
     </head>
     <body>
-        <header th:replace='layout/plantilla :: header'></header>
+       <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listarTiposGastos}]]</h3>
         <br/>
-       
         <a th:href="@{/agregar/tipoGastos}">[[#{accion.agregar}]]</a>
          <div th:if="${tipoGastos != null and !tipoGastos.empty}">
         <table border="1">
@@ -63,25 +62,21 @@
                 <th>[[#{columna.nombre}]]</th>
                 <th>[[#{columna.descripcion}]]</th>
                 <th>[[#{columna.editar}]]</th>
-                
             </tr>
-           
             <tr th:each="tipo:${tipoGastos}">
                 <td th:text="${tipo.idTipo}"></td>
                 <td th:text="${tipo.nombre}"></td>
                 <td th:text="${tipo.descripcion}"></td>
-              
-                <td> <a th:href="@{/editar/tipoGastos/} + ${tipo.idTipo}" th:text="Editar"></a></td>
-                  
+                <td> 
+                    <a th:href="@{/editar/tipoGastos/} + ${tipo.idTipo}" th:text="Editar"></a>
+                </td>
             </tr>
         </table>
          </div>
-        
          <div th:if="${tipoGastos == null or tipoGastos.empty}">
              La lista de tipos gastos esta vacia
          </div>
         <br/><!-- comment -->
-       
         <a th:href="@{/}">[[#{accion.regresarInicio}]]</a>
          <footer th:replace='layout/plantilla :: footer'></footer>
     </body>
