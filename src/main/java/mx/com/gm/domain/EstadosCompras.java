@@ -1,6 +1,7 @@
 package mx.com.gm.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
@@ -20,7 +21,9 @@ public class EstadosCompras implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idEstado;
 
+    @NotEmpty
     private String nombre;
+    @NotEmpty
     private String descripcion;
     //---------------------------------------  
     @OneToMany

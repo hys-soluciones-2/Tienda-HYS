@@ -1,10 +1,14 @@
 package mx.com.gm.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.io.Serializable;
 import java.sql.Date;
+//import java.time.LocalDate;
 import lombok.Data;
 import mx.com.gm.domain.TipoGastos;
+
 
 /**
  *
@@ -20,7 +24,11 @@ public class Gastos implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idGasto;
+    
+    @NotNull(message = "La fecha es obligatoria")
     private Date fecha;
+    
+    @Positive
     private double valor;
     
     @ManyToOne

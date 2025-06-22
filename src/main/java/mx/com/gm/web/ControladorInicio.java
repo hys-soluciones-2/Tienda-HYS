@@ -1,5 +1,6 @@
 package mx.com.gm.web;
 
+import jakarta.validation.Valid;
 import mx.com.gm.dao.IComprasDAO;
 import mx.com.gm.dao.IDetalleComprasDAO;
 import mx.com.gm.dao.IEstadosComprasDAO;
@@ -28,6 +29,7 @@ import mx.com.gm.servicio.TipoGastosService;
 import mx.com.gm.servicio.VentasService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.validation.Errors;
 
 /**
  *
@@ -61,16 +63,12 @@ public class ControladorInicio {
     @Autowired
     private ComprasService compraService;
 
-
-    
-    
-
     //============================================================
     //Esta anotacion me muestra que va hacer una peticion de tipo Get
     //con una ruta en blanco
     @GetMapping("/")
     public String inicio(@AuthenticationPrincipal User user) {
-       // log.info("Usuario que hiso login: " + user);
+        // log.info("Usuario que hiso login: " + user);
         return "index";//Es la pagina que se mostrara
     }
 //------------------------------------------------------------
@@ -90,7 +88,10 @@ public class ControladorInicio {
     }
 
     @PostMapping("/guardar/producto")
-    public String guardar(Productos producto) {
+    public String guardar(@Valid Productos producto, Errors errores) {
+        if(errores.hasErrors()){
+            return "modificarProducto";
+        }
         productoService.guardar(producto);
         return "redirect:/listar/productos";//Es la pagina que se mostrara;
     }
@@ -117,7 +118,10 @@ public class ControladorInicio {
     }
 
     @PostMapping("/guardar/provedor")
-    public String guardar(Provedores provedor) {
+    public String guardar(@Valid Provedores provedor, Errors errores) {
+        if(errores.hasErrors()){
+            return "modificarProvedor";
+        }
         provedorService.guardar(provedor);
         return "redirect:/listar/provedores";//se redirige a la pagina que deseo ir
     }
@@ -144,7 +148,10 @@ public class ControladorInicio {
     }
 
     @PostMapping("/guardar/estadoCompras")
-    public String guardarEstado(EstadosCompras estadosCompras) {
+    public String guardarEstado(@Valid EstadosCompras estadosCompras, Errors errores) {
+        if(errores.hasErrors()){
+            return "modificarEstadoCompras";
+        }
         estadoComprasServicio.gusrdarEstadosCompras(estadosCompras);
         return "redirect:/listar/estadoCompras";//Es la pagina que se mostrara;
     }
@@ -171,7 +178,10 @@ public class ControladorInicio {
     }
 
     @PostMapping("/guardar/tipoGastos")
-    public String guardarTipo(TipoGastos tipoGastos) {
+    public String guardarTipo(@Valid TipoGastos tipoGastos, Errors errores) {
+        if(errores.hasErrors()){
+            return "modificarTipoGastos";
+        }
         tipoGastosService.guardarTipoGastos(tipoGastos);
         return "redirect:/listar/tipoGastos";
     }
@@ -198,7 +208,10 @@ public class ControladorInicio {
     }
 
     @PostMapping("/guardar/ventas")
-    public String guardarVenta(Ventas venta) {
+    public String guardarVenta(@Valid Ventas venta, Errors errores) {
+        if(errores.hasErrors()){
+            return "modificarVentas";
+        }
         ventasService.guardarVentas(venta);
         return "redirect:/listar/ventas";
     }
@@ -223,14 +236,18 @@ public class ControladorInicio {
 
     @GetMapping("/agregar/gastos")
     public String agregar(Gastos gasto, Model model) {
-      // var tiposGastos = tipoGastosService.listarTipoGastos();
+        // var tiposGastos = tipoGastosService.listarTipoGastos();
         model.addAttribute("gasto", gasto); // esto es necesario para th:object
         model.addAttribute("tipoGastos", tipoGastosService.listarTipoGastos());// esto llena el select
         return "modificarGastos";
     }
 
     @PostMapping("/guardar/gastos")
-    public String guardarGasto(Gastos gasto) {
+    public String guardarGasto(@Valid Gastos gasto, Errors errores, Model model) {
+        if (errores.hasErrors()) {
+            model.addAttribute("tipoGastos", tipoGastosService.listarTipoGastos()); // Reenviar select
+            return "modificarGastos";
+        }
         gastosService.gusrdarGastos(gasto);
         return "redirect:/listar/gastos";
     }
@@ -238,7 +255,6 @@ public class ControladorInicio {
     @GetMapping("/editar/gasto/{idGasto}")
     public String editarGasto(Gastos gasto, Model model) {
         var gastos = gastosService.encontrarGasto(gasto);
-        System.out.println("7777777" + gastos);
         model.addAttribute("gastos", gastos);
         model.addAttribute("tipoGastos", tipoGastosService.listarTipoGastos());// esto llena el select
         return "/modificarGastos";
@@ -249,11 +265,11 @@ public class ControladorInicio {
     @GetMapping("/listar/compras")
     public String listarCompras(Model model) {
         var listaCompras1 = compraService.listarCompras();
-        
+
         model.addAttribute("compras", listaCompras1);
-      //  model.addAttribute("estado", estadoComprasServicio.listarEstadosCompras());
-      //  model.addAttribute("provedores", provedorService.listaProvedores());
-       // model.addAttribute("detalleCompras", detalleComprasService.listarDetalleCompras());
+        //  model.addAttribute("estado", estadoComprasServicio.listarEstadosCompras());
+        //  model.addAttribute("provedores", provedorService.listaProvedores());
+        // model.addAttribute("detalleCompras", detalleComprasService.listarDetalleCompras());
         return "/listarCompras";//Me redirecciona o muestra esta pagina
     }
 

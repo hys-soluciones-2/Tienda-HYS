@@ -16,9 +16,11 @@
             <br/>
             <label for="nombre">[[#{formulario.nombre}]]</label>
             <input type="text" name="nombre" th:field="*{nombre}"/>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors='*{nombre}'>Error nombre</span>
             <br/>
             <label for="descripcion">[[#{formulario.descripcion}]]</label>
             <input type="text" name="descripcion" th:field="*{descripcion}"/>
+            <span th:if="${#fields.hasErrors('descripcion')}" th:errors='*{descripcion}'>Error descripcion</span>
             <br/>
              <label for="estado">[[#{formulario.estado}]]</label>
             <select name="estado" th:field="*{estado}">

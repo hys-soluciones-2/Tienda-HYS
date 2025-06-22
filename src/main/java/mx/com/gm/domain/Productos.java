@@ -2,6 +2,7 @@
 package mx.com.gm.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -18,8 +19,9 @@ public class Productos implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idProducto;
-    
+    @NotEmpty
     private String nombre;
+    @NotEmpty
     private String descripcion;
     private boolean estado;
     //------------------------

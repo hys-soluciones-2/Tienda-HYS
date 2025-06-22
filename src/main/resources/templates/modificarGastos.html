@@ -17,10 +17,12 @@
             <input type="hidden" name="idGasto" th:field="*{idGasto}"/>
             <br/>
             <label for="fecha">[[#{formulario.fecha}]]:</label>
-            <input type="date" name="fecha" th:field="*{fecha}"/>
+            <input type="date" name="fecha" th:field="*{fecha}" required />
+            <span th:if="${#fields.hasErrors('fecha')}" th:errors='*{fecha}'>Error de fecha</span>
             <br/>
             <label for="valor">[[#{formulario.valorGasto}]]:</label>
             <input type="number" step="0.01" min="0" th:field="*{valor}" />
+            <span th:if="${#fields.hasErrors('valor')}" th:errors='*{valor}'>Error de valor</span>
             <br/>
             <label for="tipoGasto">[[#{formulario.tipoGasto}]]:</label>
             <select  th:field="*{tipoGasto}">
