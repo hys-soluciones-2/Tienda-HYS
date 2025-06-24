@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Tienda HYS</title>
         <meta charset="UTF-8">
@@ -53,7 +54,7 @@
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listaProducto}]]</h3>
-        <a th:href="@{/agregar/producto}">[[#{accion.agregar}]]</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar/producto}">[[#{accion.agregar}]]</a>
         <br/><!-- comment -->
         <div th:if="${productos != null and !productos.empty}">
             <table border="1">
@@ -62,7 +63,7 @@
                     <th>[[#{columna.nombre}]]</th>
                     <th>[[#{columna.descripcion}]]</th>
                     <th>[[#{columna.estado}]]</th>
-                    <th>[[#{columna.editar}]]</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{columna.editar}]]</th>
                    
 
                 </tr>
@@ -72,7 +73,7 @@
                     <td th:text="${producto.nombre}"></td>
                     <td th:text="${producto.descripcion}"></td>
                     <td th:text="${producto.estado}"></td>
-                    <td> <a th:href="@{/editar/producto/} + ${producto.idProducto}" th:text="Editar"></a></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/editar/producto/} + ${producto.idProducto}" th:text="Editar"></a></td>
 
                 </tr>
             </table>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Listar Gastos</title>
         <meta charset="UTF-8">
@@ -54,7 +55,7 @@
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listarGastos}]]</h3>
         <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
-        <a th:href="@{/agregar/gastos}">[[#{accion.agregar}]]</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar/gastos}">[[#{accion.agregar}]]</a>
         <br/><!--   <p th:text="${tipoGastos}">Aquí debería mostrarse la lista</p>   --> 
         <div th:if="${gastos != null and !gastos.empty}">
             <table border="1">
@@ -63,14 +64,14 @@
                     <th>[[#{columna.fechaGasto}]]</th>
                     <th>[[#{columna.valor}]]</th>
                     <th>[[#{columna.tipoGasto}]]</th>
-                    <th>[[#{columna.editar}]]</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{columna.editar}]]</th>
                 </tr>
                 <tr th:each="gasto:${gastos}">
                     <td th:text="${gasto.idGasto}">01/01/2025</td>
                     <td th:text="${gasto.fecha}">123.45</td>
                     <td th:text="${gasto.valor}"></td>
                     <td th:text="${gasto.tipoGasto.nombre}"></td> 
-                    <td> <a th:href="@{/editar/gasto/} + ${gasto.idGasto}" th:text="Editar"></a></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/editar/gasto/} + ${gasto.idGasto}" th:text="Editar"></a></td>
                 </tr>
             </table>
         </div>

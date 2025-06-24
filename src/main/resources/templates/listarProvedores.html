@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Tienda HYS</title>
         <meta charset="UTF-8">
@@ -54,7 +55,7 @@
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listaProvedores}]]</h3>
         <br/>
-        <a th:href="@{/agregar/provedor}">[[#{accion.agregar}]]</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar/provedor}">[[#{accion.agregar}]]</a>
          <div th:if="${provedores != null and !provedores.empty}">
         <table border="1">
             <tr>
@@ -62,14 +63,14 @@
                 <th>[[#{columna.nombre}]]</th>
                 <th>[[#{columna.descripcion}]]</th>
                 <th>[[#{columna.estado}]]</th>
-                <th>[[#{columna.editar}]]</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{columna.editar}]]</th>
             </tr>
             <tr th:each="provedor:${provedores}">
                 <td th:text="${provedor.idProvedor}"></td>
                 <td th:text="${provedor.nombre}"></td>
                 <td th:text="${provedor.descripcion}"></td>
                 <td th:text="${provedor.estado}"></td>
-                <td> <a th:href="@{/editar/provedor/} + ${provedor.idProvedor}" th:text="Editar"></a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/editar/provedor/} + ${provedor.idProvedor}" th:text="Editar"></a></td>
             </tr>
         </table>
          </div>

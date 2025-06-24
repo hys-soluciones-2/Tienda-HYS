@@ -291,8 +291,3 @@ public class ControladorInicio {
 
 }
 
-//var listaProvedores = provedorService.listaProvedores();
-// model.addAttribute("provedores", listaProvedores);
-// model.addAttribute("provedores", provedorService.listaProvedores());
-// model.addAttribute("estado", estadoComprasServicio.listarEstadosCompras());
-// model.addAttribute("detalleCompras", detalleComprasService.listarDetalleCompras());

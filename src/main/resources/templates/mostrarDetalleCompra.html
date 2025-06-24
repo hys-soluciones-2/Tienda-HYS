@@ -57,7 +57,7 @@
         <br/>
         <a th:href="@{/listar/compras}">[[#{accion.regresar}]]</a>
         <br/>
-        <h2>Detalle de la Compra #[[${compra.idCompra}]]</h2>
+        <h2>[[#{subtitulo.detalleCompraTiket}]] #[[${compra.idCompra}]]</h2>
         <p>Proveedor: <span th:text="${compra.provedor.nombre}"></span></p>
         <p>Fecha Compra: <span th:text="${compra.fechaCompra}"></span></p>
         <p>Estado: <span th:text="${compra.estado.nombre}"></span></p>
@@ -65,10 +65,10 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
+                    <th>[[#{columna.producto}]]</th>
+                    <th>[[#{columna.cantidad}]]</th>
+                    <th>[[#{columna.precioUnitario}]]</th>
+                    <th>[[#{columna.subtotal}]]</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,7 +81,7 @@
             </tbody>
         </table>
 
-        <p><strong>Total Compra:</strong> <span th:text="${compra.totalCompra}"></span></p>
+        <p><strong>[[#{columna.totalCompra}]]:</strong> <span th:text="${compra.totalCompra}"></span></p>
 
         <br>
             <a th:href="@{/listar/compras}">Regresar a la lista de compras</a>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Estados de Gastos</title>
         <meta charset="UTF-8">
@@ -54,20 +55,20 @@
        <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listarTiposGastos}]]</h3>
         <br/>
-        <a th:href="@{/agregar/tipoGastos}">[[#{accion.agregar}]]</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar/tipoGastos}">[[#{accion.agregar}]]</a>
          <div th:if="${tipoGastos != null and !tipoGastos.empty}">
         <table border="1">
             <tr>
                 <th>[[#{columna.idEstado}]]</th>
                 <th>[[#{columna.nombre}]]</th>
                 <th>[[#{columna.descripcion}]]</th>
-                <th>[[#{columna.editar}]]</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{columna.editar}]]</th>
             </tr>
             <tr th:each="tipo:${tipoGastos}">
                 <td th:text="${tipo.idTipo}"></td>
                 <td th:text="${tipo.nombre}"></td>
                 <td th:text="${tipo.descripcion}"></td>
-                <td> 
+                <td sec:authorize="hasRole('ROLE_ADMIN')"> 
                     <a th:href="@{/editar/tipoGastos/} + ${tipo.idTipo}" th:text="Editar"></a>
                 </td>
             </tr>

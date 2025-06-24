@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Estados de compras</title>
         <meta charset="UTF-8">
@@ -55,14 +56,14 @@
         <h3>[[#{subtitulo.listaEstadoCompras}]]</h3>
         <br/>
        
-        <a th:href="@{/agregar/estadoCompras}">[[#{accion.agregar}]]</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar/estadoCompras}">[[#{accion.agregar}]]</a>
          <div th:if="${estadosCompras != null and !estadosCompras.empty}">
         <table border="1">
             <tr>
                 <th>[[#{columna.idEstado}]]</th>
                 <th>[[#{columna.nombre}]]</th>
                 <th>[[#{columna.descripcion}]]</th>
-                <th>[[#{columna.editar}]]</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{columna.editar}]]</th>
                 
             </tr>
            
@@ -71,7 +72,7 @@
                 <td th:text="${estado.nombre}"></td>
                 <td th:text="${estado.descripcion}"></td>
               
-                <td> <a th:href="@{/editar/estadoCompra/} + ${estado.idEstado}" th:text="Editar"></a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/editar/estadoCompra/} + ${estado.idEstado}" th:text="Editar"></a></td>
                   
             </tr>
         </table>
