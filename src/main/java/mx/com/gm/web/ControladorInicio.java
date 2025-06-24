@@ -1,12 +1,15 @@
 package mx.com.gm.web;
 
 import jakarta.validation.Valid;
+import java.util.List;
 import mx.com.gm.dao.IComprasDAO;
 import mx.com.gm.dao.IDetalleComprasDAO;
 import mx.com.gm.dao.IEstadosComprasDAO;
 import mx.com.gm.dao.IGastosDAO;
 import mx.com.gm.dao.ITipoGastosDAO;
 import mx.com.gm.dao.IVentasDAO;
+import mx.com.gm.domain.Compras;
+import mx.com.gm.domain.DetalleCompras;
 import org.slf4j.Logger;
 import mx.com.gm.domain.EstadosCompras;
 import mx.com.gm.domain.Gastos;
@@ -30,6 +33,7 @@ import mx.com.gm.servicio.VentasService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -89,7 +93,7 @@ public class ControladorInicio {
 
     @PostMapping("/guardar/producto")
     public String guardar(@Valid Productos producto, Errors errores) {
-        if(errores.hasErrors()){
+        if (errores.hasErrors()) {
             return "modificarProducto";
         }
         productoService.guardar(producto);
@@ -119,7 +123,7 @@ public class ControladorInicio {
 
     @PostMapping("/guardar/provedor")
     public String guardar(@Valid Provedores provedor, Errors errores) {
-        if(errores.hasErrors()){
+        if (errores.hasErrors()) {
             return "modificarProvedor";
         }
         provedorService.guardar(provedor);
@@ -149,7 +153,7 @@ public class ControladorInicio {
 
     @PostMapping("/guardar/estadoCompras")
     public String guardarEstado(@Valid EstadosCompras estadosCompras, Errors errores) {
-        if(errores.hasErrors()){
+        if (errores.hasErrors()) {
             return "modificarEstadoCompras";
         }
         estadoComprasServicio.gusrdarEstadosCompras(estadosCompras);
@@ -179,7 +183,7 @@ public class ControladorInicio {
 
     @PostMapping("/guardar/tipoGastos")
     public String guardarTipo(@Valid TipoGastos tipoGastos, Errors errores) {
-        if(errores.hasErrors()){
+        if (errores.hasErrors()) {
             return "modificarTipoGastos";
         }
         tipoGastosService.guardarTipoGastos(tipoGastos);
@@ -209,7 +213,7 @@ public class ControladorInicio {
 
     @PostMapping("/guardar/ventas")
     public String guardarVenta(@Valid Ventas venta, Errors errores) {
-        if(errores.hasErrors()){
+        if (errores.hasErrors()) {
             return "modificarVentas";
         }
         ventasService.guardarVentas(venta);
@@ -267,10 +271,28 @@ public class ControladorInicio {
         var listaCompras1 = compraService.listarCompras();
 
         model.addAttribute("compras", listaCompras1);
-        //  model.addAttribute("estado", estadoComprasServicio.listarEstadosCompras());
-        //  model.addAttribute("provedores", provedorService.listaProvedores());
-        // model.addAttribute("detalleCompras", detalleComprasService.listarDetalleCompras());
         return "/listarCompras";//Me redirecciona o muestra esta pagina
     }
 
+    //--------------------------------------------------------
+    @GetMapping("mostrar/detalleCompra/{idCompra}")
+    public String mostrarDetalleCompra(Compras compra, Model model) {
+
+        compra = compraService.encontrarCompra(compra);
+
+        // Obtener los detalles asociados a esta compra
+        List<DetalleCompras> detalles = compra.getDetalleCompras();
+
+        model.addAttribute("compra", compra);
+        model.addAttribute("detalles", detalles);
+
+        return "mostrarDetalleCompra"; // Vista Thymeleaf que vas a crear
+    }
+
 }
+
+//var listaProvedores = provedorService.listaProvedores();
+// model.addAttribute("provedores", listaProvedores);
+// model.addAttribute("provedores", provedorService.listaProvedores());
+// model.addAttribute("estado", estadoComprasServicio.listarEstadosCompras());
+// model.addAttribute("detalleCompras", detalleComprasService.listarDetalleCompras());

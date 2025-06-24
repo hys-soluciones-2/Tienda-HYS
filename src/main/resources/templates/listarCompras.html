@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Detalle de las Compras</title>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -53,7 +53,7 @@
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listaCompra}]]</h3>
-        <!-- 
+        <!--
         <p th:text="${estado}">Aquí debería mostrarse la lista</p>
         <p th:text="${provedores}">Aquí debería mostrarse la lista</p>
         <p th:text="${compras}">Aquí debería mostrarse la lista</p>
@@ -61,6 +61,7 @@
         -->
         <div th:if="${compras != null and !compras.empty}">
             <table border="1">
+
                 <tr>
                     <th>[[#{columna.idCompra}]]</th>
                     <th>[[#{columna.fechaCompra}]]</th>
@@ -68,15 +69,29 @@
                     <th>[[#{columna.estado}]]</th>
                     <th>[[#{columna.provedor}]]</th>
                     <th>[[#{columna.totalCompra}]]</th>
+                    <th>[[#{columna.verDetalle}]]</th>
                 </tr>
+
                 <tr th:each="compra:${compras}"> 
                     <td th:text="${compra.idCompra}"></td>
                     <td th:text="${compra.fechaCompra}"></td>
                     <td th:text="${compra.fechaLlegada}"></td>
-                    <td th:text="${compra.estado.nombre}"></td>
-                    <td th:text="${compra.provedor.nombre}"></td>
+                    <td>
+                        <span th:if="${compra.estado != null}" th:text="${compra.estado.nombre}"></span>
+                        <span th:unless="${compra.estado != null}">Sin estado</span>
+                    </td>
+                    <td>
+                        <span th:if="${compra.provedor != null}" th:text="${compra.provedor.nombre}"></span>
+                        <span th:unless="${compra.provedor != null}">Sin proveedor</span>
+                    </td>
+                    <!--  <td th:text="${compra.estado.nombre}"></td>
+                      <td th:text="${compra.provedor.nombre}"></td>-->
                     <td th:text="${compra.totalCompra}"></td>
+                    <td>
+                        <a th:href="@{'/mostrar/detalleCompra/' + ${compra.idCompra}}">Ver detalles</a>
+                    </td>
 
+                </tr>
             </table>
         </div>
         <div th:if="${compras == null or compras.empty}">
@@ -85,20 +100,6 @@
         <br/>
         <a th:href="@{/}">[[#{accion.regresarInicio}]]</a>
         <footer th:replace='layout/plantilla :: footer'></footer>
+
     </body>
 </html>
-<!-- <!DOCTYPE html>
-
-
-        <br/><!-- Este link es el que me comunica con la plantilla de modificarVentas -->
-<!--    <a th:href="@{/agregarGastos}">Agregar Gastos</a>
-    <br/>
-
-    
-<p th:text="${tipoGastos}">Aquí debería mostrarse la lista</p>
-   
-    
-    
-</body>
-</html>
--->

@@ -35,10 +35,17 @@ public class Compras implements Serializable {
     @OneToMany(mappedBy = "compra", fetch = FetchType.EAGER) // EAGER para cargar los detalles
     private List<DetalleCompras> detalleCompras = new ArrayList<>();
 
+    //Se inicializa el contador de Compras
+    public Compras(){
+        contadorCompras++;
+    }
+    
     // Método para calcular el total de la compra
     public double getTotalCompra() {
         return detalleCompras.stream()
                 .mapToDouble(detalle -> detalle.getPrecioUnitario() * detalle.getCantidad())
                 .sum();
     }
+    //metodo para listar los provedores
+    
 }
