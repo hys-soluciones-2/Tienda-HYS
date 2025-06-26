@@ -53,7 +53,9 @@
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.detalleCompra}]]</h3>
+ <p th:text="${compras}">Aquí debería mostrarse la lista</p>
 
+ 
         <br/>
         <a th:href="@{/listar/compras}">[[#{accion.regresar}]]</a>
         <br/>

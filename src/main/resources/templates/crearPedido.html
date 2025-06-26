@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Crear Pedido</title>
+        <meta charset="UTF-8">
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                }
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-top: 20px;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 12px;
+                    text-align: left;
+                }
+                th {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                }
+                tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+                .total-amount {
+                    font-weight: bold;
+                    color: #2e7d32;
+                }
+                .no-data {
+                    text-align: center;
+                    padding: 20px;
+                    color: #666;
+                    font-style: italic;
+                }
+                .btn {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #007bff;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    margin-top: 20px;
+                }
+                .btn:hover {
+                    background-color: #0056b3;
+                }
+            </style>
+    </head>
+    <body>
+        <h2>Crear nuevo pedido</h2>
+        <br/>
+        <a th:href="@{/listar/compras}">Regresar a la lista de Detalles de Comprass</a>
+        <br/><br/>
+        <form th:action="@{/guardar/pedido}" th:object="${compra}" method="post">
+            <label>Proveedor:</label>
+            <select th:field="*{provedor}" required>
+                <option value="" disabled selected>-- Selecciona un proveedor --</option>
+                <option th:each="p : ${provedores}" th:value="${p.idProvedor}" th:text="${p.nombre}"></option>
+            </select><br/><br/>
+            <label>Estado:</label>
+            <select th:field="*{estado}" required>
+                <option value="" disabled selected>-- Selecciona un estado --</option>
+                <option th:each="e : ${estados}" th:value="${e.idEstado}" th:text="${e.nombre}"></option>
+            </select>
+            <br/><br/>
+            <label for="fechaCompra">Dia de Compra</label>
+            <input type="date" th:field="*{fechaCompra}" required />
+            <label for="fechaLlegada">Dia de Llegada</label>
+            <input type="date" th:field="*{fechaLlegada}" required />
+
+            <table>
+                <tr>
+                    <th>Productos</th>
+                    <th>Cantidad(u/d)</th>
+                    <th>Precio Unitario</th>
+                </tr>
+                <!-- 
+               <tr th:each="producto, i : ${productos}">
+                   <td th:text="${producto.nombre}"></td>
+                   <input type="hidden" th:name="${'detalles[' + i.index + '].producto.idProducto'}" th:value="${producto.idProducto}" />
+                   <td><input type="number" th:name="${'detalles[' + i.index + '].cantidad'}" /></td>
+                   <td><input type="number" th:name="${'detalles[' + i.index + '].precioUnitario'}" /></td>
+               </tr>
+                -->
+                <tr th:each="i : ${#numbers.sequence(0, 2)}">
+                    <td>
+                        <select th:name="${'detalles[' + i + '].producto.idProducto'}">
+                            <option value="" disabled selected>-- Producto --</option>
+                            <option th:each="p : ${productos}" th:value="${p.idProducto}" th:text="${p.nombre}"></option>
+                        </select>
+                    </td>
+                    <td><input type="number" th:name="${'detalles[' + i + '].cantidad'}" /></td>
+                    <td><input type="number" th:name="${'detalles[' + i + '].precioUnitario'}" /></td>
+                </tr>
+            </table>
+            <button type="submit">Guardar Pedido</button>
+        </form>
+        <br/>
+        <a th:href="@{/listar/compras}">Regresar a la lista de Detalles de Comprass</a>
+        <br/>
+        <br/>
+        <a th:href="@{/}">Regresar al inicio</a>
+    </body>
+</html>

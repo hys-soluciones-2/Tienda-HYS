@@ -26,8 +26,8 @@ public class EstadosCompras implements Serializable {
     @NotEmpty
     private String descripcion;
     //---------------------------------------  
-    @OneToMany
-    @JoinColumn(name = "id_estado")
-    private List<Compras> compras;
+//    @OneToMany
+//    @JoinColumn(name = "id_estado")
+//    private List<Compras> compras;
     //---------------------------------------
 }

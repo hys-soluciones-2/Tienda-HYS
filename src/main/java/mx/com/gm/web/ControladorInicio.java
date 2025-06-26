@@ -1,6 +1,8 @@
 package mx.com.gm.web;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import mx.com.gm.dao.IComprasDAO;
 import mx.com.gm.dao.IDetalleComprasDAO;
@@ -19,6 +21,7 @@ import mx.com.gm.domain.TipoGastos;
 import mx.com.gm.domain.Ventas;
 import mx.com.gm.servicio.ComprasService;
 import mx.com.gm.servicio.DetalleComprasService;
+import mx.com.gm.servicio.DetalleComprasServiceImpl;
 import mx.com.gm.servicio.ProductoService;
 import mx.com.gm.servicio.ProvedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +35,11 @@ import mx.com.gm.servicio.TipoGastosService;
 import mx.com.gm.servicio.VentasService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -62,7 +68,7 @@ public class ControladorInicio {
     private GastosService gastosService;
 
     @Autowired
-    private DetalleComprasService detalleComprasService;
+    private DetalleComprasServiceImpl detalleComprasService;
 
     @Autowired
     private ComprasService compraService;
@@ -289,5 +295,67 @@ public class ControladorInicio {
         return "mostrarDetalleCompra"; // Vista Thymeleaf que vas a crear
     }
 
-}
+    //-------------------------------------------------------
+    //---------------Crear un pedido ------------------------
+    @GetMapping("/crear/pedido")
+    public String crearPedido(Model model) {
+        Compras compra = new Compras();
+        compra.setProvedor(new Provedores());
+        compra.setEstado(new EstadosCompras());
+        model.addAttribute("compra", compra);
+        model.addAttribute("provedores", provedorService.listaProvedores());
+        model.addAttribute("productos", productoService.listarProductos());
+        model.addAttribute("estados", estadoComprasServicio.listarEstadosCompras());
+        //model.addAttribute("compraServicio", compraService.listarCompras());
+        return "crearPedido";
+    }
 
+    //--------------------------------------------------------
+    //------------Guardar un Pedido--------------------------
+    @Transactional
+    @PostMapping("/guardar/pedido")
+    public String guardarPedido(@ModelAttribute Compras compra,
+            HttpServletRequest request, Model model) {
+        List<DetalleCompras> detalles = new ArrayList<>();
+
+        String[] ids = request.getParameterValues("detalles[*].producto.idProducto");
+        String[] cantidades = request.getParameterValues("detalles[*].cantidad");
+        String[] precios = request.getParameterValues("detalles[*].precioUnitario");
+
+        if (ids != null && cantidades != null && precios != null) {
+            for (int i = 0; i < ids.length; i++) {
+                try {
+                    Long idProducto = Long.parseLong(ids[i]);
+                    int cantidad = Integer.parseInt(cantidades[i]);
+                    double precio = Double.parseDouble(precios[i]);
+                    if (cantidad > 0 && precio > 0) {
+                        DetalleCompras detalle = new DetalleCompras();
+                        Productos producto = new Productos();
+                        producto.setIdProducto(idProducto);
+                        detalle.setProducto(producto);
+                        detalle.setCantidad(cantidad);
+                        detalle.setPrecioUnitario(precio);
+                        detalles.add(detalle);
+                    }
+                } catch (Exception e) {
+                    // Log o ignorar valores no válidos
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        compra.procesarDetalles(detalles);
+        compraService.gusrdarCompras(compra);
+        return "redirect:/listar/compras";
+    }
+//----------------------------------------------------------
+//----------------------------------------------------------
+
+    @GetMapping("/detalle/compra/{id}")
+    public String verDetalleCompra(@PathVariable("id") Compras compra, Model model) {
+        compra = compraService.encontrarCompra(compra);
+        model.addAttribute("compra", compra);
+        return "verDetalleCompra";
+    }
+
+}

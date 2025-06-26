@@ -54,12 +54,15 @@
     <body>
         <header th:replace='layout/plantilla :: header'></header>
         <h3>[[#{subtitulo.listaCompra}]]</h3>
+        
+        <p th:text="${estados}">Aquí debería mostrarse la lista</p>
         <!--
-        <p th:text="${estado}">Aquí debería mostrarse la lista</p>
         <p th:text="${provedores}">Aquí debería mostrarse la lista</p>
-        <p th:text="${compras}">Aquí debería mostrarse la lista</p>
+        <p th:text="${compra}">Aquí debería mostrarse la lista</p>
         <p th:text="${detalleCompras}">Aquí debería mostrarse la lista</p>
         -->
+         <a th:href="@{/crear/pedido}">Crear Pedido</a>
+        <br/><!-- comment -->
         <div th:if="${compras != null and !compras.empty}">
             <table border="1">
 
@@ -77,9 +80,9 @@
                     <td th:text="${compra.idCompra}"></td>
                     <td th:text="${compra.fechaCompra}"></td>
                     <td th:text="${compra.fechaLlegada}"></td>
-                    <td>
-                        <span th:if="${compra.estado != null}" th:text="${compra.estado.nombre}"></span>
-                        <span th:unless="${compra.estado != null}">Sin estado</span>
+                    <td th:text="${compra.estado != null ? compra.estado.nombre : 'Sin estado'}">
+                     <!--   <span th:if="${compra.estado != null}" th:text="${compra.estado.nombre}"></span>
+                        <span th:unless="${compra.estado != null}">Sin estado</span>-->
                     </td>
                     <td>
                         <span th:if="${compra.provedor != null}" th:text="${compra.provedor.nombre}"></span>
@@ -87,7 +90,7 @@
                     </td>
                     <!--  <td th:text="${compra.estado.nombre}"></td>
                       <td th:text="${compra.provedor.nombre}"></td>-->
-                    <td th:text="${compra.totalCompra}"></td>
+                    <td th:text="${compra.totalCompra}">0.0</td>
                     <td>
                         <a th:href="@{'/mostrar/detalleCompra/' + ${compra.idCompra}}">Ver detalles</a>
                     </td>
