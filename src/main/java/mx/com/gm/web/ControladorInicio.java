@@ -3,6 +3,7 @@ package mx.com.gm.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import mx.com.gm.dao.IComprasDAO;
 import mx.com.gm.dao.IDetalleComprasDAO;
@@ -318,27 +319,27 @@ public class ControladorInicio {
             HttpServletRequest request, Model model) {
         List<DetalleCompras> detalles = new ArrayList<>();
 
-        String[] ids = request.getParameterValues("detalles[*].producto.idProducto");
-        String[] cantidades = request.getParameterValues("detalles[*].cantidad");
-        String[] precios = request.getParameterValues("detalles[*].precioUnitario");
+        for (int i = 0; i <= 2; i++) {
+            String id = request.getParameter("detalles[" + i + "].producto.idProducto");
+            String cantidad = request.getParameter("detalles[" + i + "].cantidad");
+            String precio = request.getParameter("detalles[" + i + "].precioUnitario");
 
-        if (ids != null && cantidades != null && precios != null) {
-            for (int i = 0; i < ids.length; i++) {
+            if (id != null && cantidad != null && precio != null) {
                 try {
-                    Long idProducto = Long.parseLong(ids[i]);
-                    int cantidad = Integer.parseInt(cantidades[i]);
-                    double precio = Double.parseDouble(precios[i]);
-                    if (cantidad > 0 && precio > 0) {
+                    Long idProducto = Long.parseLong(id);
+                    int cant = Integer.parseInt(cantidad);
+                    double pre = Double.parseDouble(precio);
+
+                    if (cant > 0 && pre > 0) {
                         DetalleCompras detalle = new DetalleCompras();
                         Productos producto = new Productos();
                         producto.setIdProducto(idProducto);
                         detalle.setProducto(producto);
-                        detalle.setCantidad(cantidad);
-                        detalle.setPrecioUnitario(precio);
+                        detalle.setCantidad(cant);
+                        detalle.setPrecioUnitario(pre);
                         detalles.add(detalle);
                     }
                 } catch (Exception e) {
-                    // Log o ignorar valores no válidos
                     e.printStackTrace();
                 }
             }

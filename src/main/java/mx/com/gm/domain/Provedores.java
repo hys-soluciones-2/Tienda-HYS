@@ -25,9 +25,9 @@ public class Provedores implements Serializable {
     @NotEmpty
     private String descripcion;
     private boolean estado;
-
+/*
     @OneToMany
     @JoinColumn(name = "id_provedor")
     private List<Compras> compras; // ✅ Debe coincidir con la base de datos
-
+*/
 }
