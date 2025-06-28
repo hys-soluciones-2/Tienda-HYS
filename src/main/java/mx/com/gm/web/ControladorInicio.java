@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import mx.com.gm.dao.IComprasDAO;
 import mx.com.gm.dao.IDetalleComprasDAO;
 import mx.com.gm.dao.IEstadosComprasDAO;
@@ -319,10 +320,15 @@ public class ControladorInicio {
             HttpServletRequest request, Model model) {
         List<DetalleCompras> detalles = new ArrayList<>();
 
-        for (int i = 0; i <= 2; i++) {
-            String id = request.getParameter("detalles[" + i + "].producto.idProducto");
-            String cantidad = request.getParameter("detalles[" + i + "].cantidad");
-            String precio = request.getParameter("detalles[" + i + "].precioUnitario");
+        // Obtenemos todos los parámetros del request
+        Map<String, String[]> parametros = request.getParameterMap();
+
+        int filas = 0;
+        while (parametros.containsKey("detalles[" + filas + "].producto.idProducto")) {
+        // for (int i = 0; i <= 2; i++) {
+            String id = request.getParameter("detalles[" + filas + "].producto.idProducto");
+            String cantidad = request.getParameter("detalles[" + filas + "].cantidad");
+            String precio = request.getParameter("detalles[" + filas + "].precioUnitario");
 
             if (id != null && cantidad != null && precio != null) {
                 try {
@@ -343,6 +349,7 @@ public class ControladorInicio {
                     e.printStackTrace();
                 }
             }
+            filas++;
         }
 
         compra.procesarDetalles(detalles);
@@ -353,7 +360,8 @@ public class ControladorInicio {
 //----------------------------------------------------------
 
     @GetMapping("/detalle/compra/{id}")
-    public String verDetalleCompra(@PathVariable("id") Compras compra, Model model) {
+    public String verDetalleCompra(@PathVariable("id") Compras compra, Model model
+    ) {
         compra = compraService.encontrarCompra(compra);
         model.addAttribute("compra", compra);
         return "verDetalleCompra";

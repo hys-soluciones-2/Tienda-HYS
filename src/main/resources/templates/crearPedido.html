@@ -72,7 +72,7 @@
             <input type="date" th:field="*{fechaCompra}" required />
             <label for="fechaLlegada">Dia de Llegada</label>
             <input type="date" th:field="*{fechaLlegada}" required />
-
+            <!-- 
             <table>
                 <tr>
                     <th>Productos</th>
@@ -90,7 +90,57 @@
                     <td><input type="number" th:name="detalles[__${i}__].precioUnitario" /></td>
                 </tr>
 
+            </table>-->
+            <table id="tabla-detalles">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="detalle-body">
+                    <!-- Aquí se agregarán dinámicamente las filas -->
+                </tbody>
             </table>
+
+            <button type="button" onclick="agregarFila()">+ Agregar Producto</button>
+
+            <script th:inline="javascript">
+               /*<![CDATA[*/
+                const productos = [[${productos}]];
+                let index = 0;
+
+                function agregarFila() {
+                const tbody = document.getElementById("detalle-body");
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                <td>
+                <select name="detalles[${index}].producto.idProducto" required>
+                <option value="" disabled selected>-- Producto --</option>
+                ${productos.map(p => `<option value="${p.idProducto}">${p.nombre}</option>`).join('')}
+                </select>
+                </td>
+                <td><input type="number" name="detalles[${index}].cantidad" required /></td>
+                <td><input type="number" name="detalles[${index}].precioUnitario" required /></td>
+                <td><button type="button" onclick="eliminarFila(this)">-</button></td>
+                `;
+
+                tbody.appendChild(row);
+                index++;
+                }
+
+                function eliminarFila(boton) {
+                boton.closest("tr").remove();
+                }
+
+                // Agregar una fila por defecto al cargar la página
+                window.onload = () => agregarFila();
+                /*]]>*/
+            </script>
+
             <button type="submit">Guardar Pedido</button>
         </form>
         <br/>
